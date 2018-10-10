@@ -18,7 +18,8 @@ passport.deserializeUser( async (id, done) => {
 passport.use(new GoogleStrategy({
   clientID: keys.googleClientID,
   clientSecret: keys.googleClientSecret,
-  callbackURL: '/auth/google/callback'
+  callbackURL: '/auth/google/callback',
+  proxy: true
 }, async (accessToken, refreshToken, profile, done) => {
 
   const user = await User.findOne({ googleID: profile.id});
@@ -41,7 +42,8 @@ passport.use(new GoogleStrategy({
 passport.use(new GitHubStrategy({
   clientID: keys.githubClientID,
   clientSecret: keys.githubClientSecret,
-  callbackURL: "/auth/github/callback"
+  callbackURL: "/auth/github/callback",
+  proxy: true
 }, async (accessToken, refreshToken, profile, done) => {
 
   console.log("profile ID: ", profile.id);
