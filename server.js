@@ -37,6 +37,10 @@ mongoose.connect(db, {useNewUrlParser: true})
 // Use route files
 app.use('/auth', auth);
 
+app.get('/', (req, res) => {
+  res.send('Homepage');
+})
+
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
