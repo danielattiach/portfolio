@@ -45,7 +45,7 @@ mongoose.connect(db, {useNewUrlParser: true})
 app.use('/auth', auth);
 
 app.get('/', (req, res) => {
-  res.send('Homepage');
+  res.send('Homepage new');
 })
 
 if (process.env.NODE_ENV === 'production') {
