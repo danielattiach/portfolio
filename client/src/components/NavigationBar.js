@@ -11,18 +11,21 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem } from 'reactstrap';
+import { connect } from 'react-redux';
+import { getAcc } from '../actions/authActions';
 
 import GoogleIcon from '../img/google-icon.png';
 import GitHubIcon from '../img/github-icon.png';
 import Logo from '../img/logo-icon.png'
 
-export default class NavigationBar extends React.Component {
+class NavigationBar extends React.Component {
   constructor(props) {
     super(props);
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      name: ""
     };
   }
   toggle() {
@@ -30,6 +33,13 @@ export default class NavigationBar extends React.Component {
       isOpen: !this.state.isOpen
     });
   }
+
+  async componentDidMount() {
+    const thing = await fetch('/auth/current');
+    const user = await thing.json();
+    this.props.getAccount(user);
+  }
+
   render() {
     return (
       <div>
@@ -41,9 +51,7 @@ export default class NavigationBar extends React.Component {
               <NavItem>
                 <NavLink href="/">Home</NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">Page</NavLink>
-              </NavItem>
+              {this.props.isAuthenticated ? <NavItem><NavLink href="/profile">Profile</NavLink></NavItem> : null}
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                   Login
@@ -55,10 +63,9 @@ export default class NavigationBar extends React.Component {
                   <DropdownItem>
                   <NavLink href='/auth/github'> <img src={GitHubIcon} width={24}/> GitHub </NavLink>
                   </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>
-                    <NavLink href='/auth/logout'>Log Out</NavLink>
-                  </DropdownItem>
+                  {
+                    this.props.isAuthenticated ? <div><DropdownItem divider /><DropdownItem><NavLink href='/auth/logout'>Log Out</NavLink></DropdownItem></div> : null
+                  }
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
@@ -68,3 +75,17 @@ export default class NavigationBar extends React.Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      getAccount : (data) => dispatch(getAcc(data))
+  }
+};
+
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.auth.isAuthenticated
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavigationBar);

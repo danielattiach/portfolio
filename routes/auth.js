@@ -15,12 +15,16 @@ router.get('/github', passport.authenticate('github', {
 router.get('/github/callback', passport.authenticate('github'))
 
 router.get('/current', (req, res) => {
-  res.send(req.user);
+  if (req.user) {
+    res.send(req.user);
+  } else {
+    res.send({fail: "404"});
+  }
 });
 
 router.get('/logout', (req, res) => {
   req.logout();
-  res.send({ logInOut: 'logged out' });
+  res.redirect('/');
 });
 
 module.exports = router;

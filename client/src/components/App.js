@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import NavigationBar from './NavigationBar';
-import TestComponent from './TestComponent';
+import Profile from './Profile';
 
 export default () => {
   return (
@@ -10,7 +10,7 @@ export default () => {
       <NavigationBar />
       <Router>
         <div>
-          <Route path='/test' component={TestComponent} />
+          <Route path='/profile' component={Profile} />
         </div>
       </Router>
     </div>
