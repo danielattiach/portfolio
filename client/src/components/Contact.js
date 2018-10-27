@@ -38,7 +38,7 @@ export default class Contact extends Component {
 
   render() {
     return (
-      <div className="mx-auto" style={{marginTop: "75px", width: "50%"}}>
+      <div className="mx-auto" style={{marginTop: "75px", width: "75%"}}>
         <h2 className="text-center mb-3">Contact</h2>
         <Form method="POST" action="/messages/send">
         <FormGroup row>
