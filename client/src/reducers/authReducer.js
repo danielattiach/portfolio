@@ -15,11 +15,11 @@ export default (state = initialState, action) => {
           user: {}
         }
       } else {
-        return {
-          ...state,
-          isAuthenticated: true,
-          user: action.payload
-        }
+          return {
+            ...state,
+            isAuthenticated: true,
+            user: action.payload
+          }
       }
     default:
       return state;

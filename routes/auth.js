@@ -6,13 +6,13 @@ router.get('/google', passport.authenticate('google', {
   scope: ['profile', 'email']
 }));
 
-router.get('/google/callback', passport.authenticate('google'));
+router.get('/google/callback', passport.authenticate('google'), (req, res) => { res.redirect('/')});
 
 router.get('/github', passport.authenticate('github', {
   scope: [ 'user:email' ]
 }));
 
-router.get('/github/callback', passport.authenticate('github'))
+router.get('/github/callback', passport.authenticate('github'), (req, res) => { res.redirect('/')})
 
 router.get('/current', (req, res) => {
   if (req.user) {

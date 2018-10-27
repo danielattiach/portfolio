@@ -6,12 +6,17 @@ class Profile extends Component {
   constructor(props) {
     super(props);
   }
+
+  componentDidMount() {
+    document.title = "Profile";
+  }
+
   render() {
     return (
       <div className="container">
         <div className="row">
         <div className="col-sm text-center">
-            <img className="profile-avatar" src={this.props.user.avatar}/>
+            <img alt="user-avatar" className="profile-avatar" src={this.props.user.avatar}/>
           </div>
         </div>
         <div className="row">

@@ -6,17 +6,11 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem } from 'reactstrap';
+  NavLink } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getAcc } from '../actions/authActions';
-
-import GoogleIcon from '../img/google-icon.png';
-import GitHubIcon from '../img/github-icon.png';
 import Logo from '../img/logo-icon.png'
+import LoginButton from './LoginButton';
 
 class NavigationBar extends React.Component {
   constructor(props) {
@@ -42,32 +36,17 @@ class NavigationBar extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="shadow-sm bg-white rounded fixed-top">
         <Navbar color="light" light expand="md">
-          <NavbarBrand href="/"><img src={Logo} width={24} style={{"marginRight": 10, "marginBottom": 10}}/>Portfolio</NavbarBrand>
+          <NavbarBrand href="/"><img alt="logo" src={Logo} width={24} style={{"marginRight": 10, "marginBottom": 7}}/>Portfolio</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/">Home</NavLink>
+                <NavLink href="/contact">Contact</NavLink>
               </NavItem>
               {this.props.isAuthenticated ? <NavItem><NavLink href="/profile">Profile</NavLink></NavItem> : null}
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Login
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>
-                    <NavLink href='/auth/google'> <img src={GoogleIcon} width={24}/> Google </NavLink>
-                  </DropdownItem>
-                  <DropdownItem>
-                  <NavLink href='/auth/github'> <img src={GitHubIcon} width={24}/> GitHub </NavLink>
-                  </DropdownItem>
-                  {
-                    this.props.isAuthenticated ? <div><DropdownItem divider /><DropdownItem><NavLink href='/auth/logout'>Log Out</NavLink></DropdownItem></div> : null
-                  }
-                </DropdownMenu>
-              </UncontrolledDropdown>
+              {this.props.isAuthenticated ? <NavItem><NavLink href="/auth/logout">Log Out</NavLink></NavItem> : <LoginButton />}
             </Nav>
           </Collapse>
         </Navbar>
@@ -84,7 +63,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    isAdmin: state.auth.isAdmin
   }
 }
 

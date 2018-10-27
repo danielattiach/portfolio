@@ -5,11 +5,14 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 const keys = require('./config/keys');
 const path = require('path');
+const cors = require('cors');
 
 require('./models/User');
 require('./services/passport');
 
 const app = express();
+
+app.use(cors());
 
 app.use(cookieSession({
   maxAge: 14 * 24 * 60 * 60 * 1000,
@@ -26,12 +29,13 @@ app.use((req, res, next) => {
   next();
 });
 
-// Import route files
-const auth = require('./routes/auth');
-
 // Body parser middleware
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
+// Import route files
+const auth = require('./routes/auth');
+const messages = require('./routes/messages');
 
 // DB Config
 const db = require('./config/keys').mongoURI;
@@ -44,6 +48,7 @@ mongoose.connect(db, {useNewUrlParser: true})
 
 // Use route files
 app.use('/auth', auth);
+app.use('/messages', messages);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
