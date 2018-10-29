@@ -12,7 +12,7 @@ router.post('/send', (req, res) => {
       <li>Email: ${req.body.email}</li>
     </ul>
     <h3>Message:</h3>
-    <p>Subject: ${req.body.subject}</p>
+    <p style="text-decoration: underline">Subject: ${req.body.subject}</p>
     <p>${req.body.message}</p>
     `;
 
@@ -33,10 +33,11 @@ router.post('/send', (req, res) => {
 
   transporter.sendMail(mailOptions, function (err, info) {
     if(err)
-      console.log(err)
+      //console.log(err)
+      res.json({status: 500})
     else
       //res.send(info);
-      res.redirect('/');
+      res.json({status: 200})
   });
 
 });
