@@ -13,32 +13,18 @@ export default class Contact extends Component {
       message: '',
       status: 0
     };
-    this.handleNameChange = this.handleNameChange.bind(this);
-    this.handleEmailChange = this.handleEmailChange.bind(this);
-    this.handleSubjectChange = this.handleSubjectChange.bind(this);
-    this.handleMessageChange = this.handleMessageChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.printState = this.printState.bind(this);
   }
 
-  handleNameChange(e) {
-    e.preventDefault();
-    this.setState({name: e.target.value});
+  componentDidMount() {
+    document.title = 'Contact'
   }
 
-  handleEmailChange(e) {
+  handleChange(e) {
     e.preventDefault();
-    this.setState({email: e.target.value});
-  }
-
-  handleSubjectChange(e) {
-    e.preventDefault();
-    this.setState({subject: e.target.value});
-  }
-
-  handleMessageChange(e) {
-    e.preventDefault();
-    this.setState({message: e.target.value});
+    this.setState({[e.target.id]: e.target.value});
   }
 
   async onSubmit(e) {
@@ -74,25 +60,25 @@ export default class Contact extends Component {
           <FormGroup row>
               <Label for="name" sm={2} size="sm">Name:</Label>
               <Col sm={10}>
-                <Input type="text" name="name" id="name" onChange={this.handleNameChange}/>
+                <Input type="text" name="name" id="name" onChange={this.handleChange}/>
               </Col>
             </FormGroup>
             <FormGroup row>
               <Label for="email" sm={2} size="sm">Email:</Label>
               <Col sm={10}>
-                <Input type="email" name="email" id="email" onChange={this.handleEmailChange}/>
+                <Input type="email" name="email" id="email" onChange={this.handleChange}/>
               </Col>
             </FormGroup>
             <FormGroup row>
               <Label for="subject" sm={2} size="sm">Subject:</Label>
               <Col sm={10}>
-                <Input type="text" name="subject" id="subject" onChange={this.handleSubjectChange}/>
+                <Input type="text" name="subject" id="subject" onChange={this.handleChange}/>
               </Col>
             </FormGroup>
             <FormGroup row>
               <Label for="message" sm={2} size="sm">Message:</Label>
               <Col sm={10}>
-                <Input type="textarea" name="message" id="message" onChange={this.handleMessageChange}/>
+                <Input type="textarea" name="message" id="message" onChange={this.handleChange}/>
               </Col>
             </FormGroup>
             <div className="text-center"><Button onClick={this.onSubmit}>Submit</Button></div>
