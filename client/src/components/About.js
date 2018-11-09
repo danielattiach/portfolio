@@ -10,7 +10,7 @@ export class About extends Component {
   render() {
     return (
       <div className="mx-auto" style={{marginTop: "75px", width: "75%"}}>
-        <div style={{width: "75%"}}>
+        <div className="mx-auto" style={{width: "75%"}}>
         <div className="mt-2 mb-2">Javascript: <Progress animated value={80} color="warning" /></div>
         <div className="mt-2 mb-2">Node.js: <Progress animated value={70} color="success" /></div>
         <div className="mt-2 mb-2">React: <Progress animated value={70} color="info" /></div>
