@@ -1,23 +1,25 @@
 import React, { Component } from 'react'
 import { Progress } from 'reactstrap';
+import '../css/about.css';
 
 export class About extends Component {
 
   componentDidMount() {
-    document.title = 'About'
+    document.title = 'About';
   }
 
   render() {
     return (
       <div className="mx-auto" style={{marginTop: "75px", width: "75%"}}>
+        <h3 className="text-center" >Daniel Attiach</h3>
         <div className="mx-auto" style={{width: "75%"}}>
-        <div className="mt-2 mb-2">Javascript: <Progress animated value={80} color="warning" /></div>
-        <div className="mt-2 mb-2">Node.js: <Progress animated value={70} color="success" /></div>
-        <div className="mt-2 mb-2">React: <Progress animated value={70} color="info" /></div>
-        <div className="mt-2 mb-2">HTML: <Progress animated value={85} /></div>
-        <div className="mt-2 mb-2">CSS: <Progress animated value={80} color="success" /></div>
-        <div className="mt-2 mb-2">Python: <Progress animated value={80} color="danger" /></div>
-        <div className="mt-2 mb-2">Django: <Progress animated value={30} /></div>
+        <div className="mt-2 mb-2">Javascript: <Progress value={80} barClassName="js-bar" /></div>
+        <div className="mt-2 mb-2">Node.js: <Progress value={70} barClassName="node-bar" /></div>
+        <div className="mt-2 mb-2">React: <Progress value={70} barClassName="react-bar" /></div>
+        <div className="mt-2 mb-2">HTML: <Progress value={85} barClassName="html-bar" /></div>
+        <div className="mt-2 mb-2">CSS: <Progress value={80} barClassName="css-bar" /></div>
+        <div className="mt-2 mb-2">Python: <Progress value={80} barClassName="python-bar" /></div>
+        <div className="mt-2 mb-2">Django: <Progress value={30} barClassName="django-bar" /></div>
         </div>
       </div>
     )

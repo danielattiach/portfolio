@@ -1,0 +1,35 @@
+.js-bar {
+  background-color: #F0DB50;
+}
+
+.node-bar {
+  background-color: #669E64;
+}
+
+.react-bar {
+  background-color: #61DAFB;
+}
+
+.html-bar {
+  background-color: #E44C26;
+}
+
+.css-bar {
+  background-color: #126FB1;
+}
+
+.python-bar {
+  /* background: linear-gradient(to right, #3874A5 0%,#3874A5 50%, #3874A5 50%,#EFC611 50%,#EFC611 100%); */
+  /* background: repeating-linear-gradient(
+    90deg,
+    #3874A5,
+    #3874A5 10px,
+    #EFC611 10px,
+    #EFC611 20px
+  ); */
+  background: linear-gradient(to right, #3874A5 0%, #3874A5 40%, #EFC611 60%, #EFC611 100%) 
+}
+
+.django-bar {
+  background-color: #0A2D1E;
+}
