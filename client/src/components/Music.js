@@ -32,7 +32,7 @@ export default function Music() {
         <button onClick={search}>Search</button>
       </form>
       <div className="row">
-        {results[0] === 'x' ? 'Loading...' : results.map((song, i) => <Song key={i} track={song}/>)}
+        {results[0] === 'x' ? 'Loading...' : results.map((song, i) => <Song key={i} id={i} track={song}/>)}
       </div>
     </div>
   )
