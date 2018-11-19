@@ -36,6 +36,7 @@ app.use(bodyParser.json());
 // Import route files
 const auth = require('./routes/auth');
 const messages = require('./routes/messages');
+const music = require('./routes/music');
 
 // DB Config
 const db = require('./config/keys').mongoURI;
@@ -49,6 +50,7 @@ mongoose.connect(db, {useNewUrlParser: true})
 // Use route files
 app.use('/auth', auth);
 app.use('/messages', messages);
+app.use('/music', music);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {

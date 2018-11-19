@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import '../css/top.css';
 import MessageSuccess from './MessageSuccess';
 import MessageFail from './MessageFail';
 
@@ -37,7 +38,7 @@ export default function Contact() {
 
   if (status === 0) {
     return (
-      <div className="mx-auto" style={{marginTop: "75px", width: "75%"}}>
+      <div className="mx-auto top width">
         <h2 className="text-center mb-3">Contact</h2>
         <Form>
         <FormGroup row>

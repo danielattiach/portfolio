@@ -24,6 +24,9 @@ export default function NavigationBar({state}) {
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
+          <NavItem>
+              <NavLink href="/music">Music</NavLink>
+            </NavItem>
             <NavItem>
               <NavLink href="/about">About</NavLink>
             </NavItem>

@@ -6,5 +6,7 @@ module.exports = {
   githubClientSecret: process.env.GITHUB_CLIENT_SECRET,
   cookieKey: process.env.COOKIE_KEY,
   sendEmail: process.env.SEND_EMAIL,
-  emailPass: process.env.EMAIL_PASS
+  emailPass: process.env.EMAIL_PASS,
+  lastFMAPI: process.env.LASTFM_API,
+  lastFMSecret: process.env.LASTFM_SECRET
 }
