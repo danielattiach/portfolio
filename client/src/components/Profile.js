@@ -1,36 +1,28 @@
-import React, { Component } from 'react'
-import {connect} from 'react-redux';
+import React, { useEffect, useState } from 'react'
 import '../css/profile.css';
 
-class Profile extends Component {
-  constructor(props) {
-    super(props);
-  }
+export default function Profile({state}) {
 
-  componentDidMount() {
-    document.title = "Profile";
-  }
+  const [profile, setProfile] = useState({isAuthenticated: false, user: {name: '', avatar: ''}})
 
-  render() {
+  useEffect(() => {
+    document.title = 'Profile';
+    setProfile(state);
+    return;
+  }, [state]);
+
     return (
       <div className="container">
         <div className="row">
         <div className="col-sm text-center">
-            <img alt="user-avatar" className="profile-avatar" src={this.props.user.avatar}/>
+            {profile.user.avatar ? <img alt="user-avatar" className="profile-avatar" src={profile.user.avatar}/> : 'Loadig...'}
           </div>
         </div>
         <div className="row">
           <div className="col-sm text-center">
-            <h2 className="profile-title">{this.props.user.name}</h2>
+            <h2 className="profile-title">{profile.user.name ? profile.user.name : 'Loading...'}</h2>
           </div>
         </div>
       </div>
     )
-  }
 }
-
-const mapStateToProps = (state) => ({
-  user: state.auth.user
-});
-
-export default connect(mapStateToProps, null)(Profile);

@@ -2,7 +2,7 @@ import React from 'react'
 import { Jumbotron, Container } from 'reactstrap';
 import '../css/message.css';
 
-export default function MessageSuccess(props) {
+export default function MessageFail(props) {
   return (
     <div>
       <h2>Oops!</h2>

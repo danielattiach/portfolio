@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Collapse,
   Navbar,
@@ -7,68 +7,34 @@ import {
   Nav,
   NavItem,
   NavLink } from 'reactstrap';
-import { connect } from 'react-redux';
-import { getAcc } from '../actions/authActions';
 import Logo from '../img/logo-icon.png'
 import LoginButton from './LoginButton';
+export default function NavigationBar({state}) {
 
-class NavigationBar extends React.Component {
-  constructor(props) {
-    super(props);
+  const [isOpen, setIsOpen] = useState(false);
 
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-      isOpen: false,
-      name: ""
-    };
-  }
-  toggle() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
+  const toggle = () => {
+    setIsOpen(!isOpen);
   }
 
-  async componentDidMount() {
-    const thing = await fetch('/auth/current');
-    const user = await thing.json();
-    this.props.getAccount(user);
-  }
-
-  render() {
-    return (
-      <div className="shadow-sm bg-white rounded fixed-top">
-        <Navbar color="light" light expand="md">
-          <NavbarBrand href="/"><img alt="logo" src={Logo} width={24} style={{"marginRight": 10, "marginBottom": 7}}/>Portfolio</NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="/about">About</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/contact">Contact</NavLink>
-              </NavItem>
-              {this.props.isAuthenticated ? <NavItem><NavLink href="/profile">Profile</NavLink></NavItem> : null}
-              {this.props.isAuthenticated ? <NavItem><NavLink href="/auth/logout">Log Out</NavLink></NavItem> : <LoginButton />}
-            </Nav>
-          </Collapse>
-        </Navbar>
-      </div>
-    );
-  }
+  return (
+    <div className="shadow-sm bg-white rounded fixed-top">
+      <Navbar color="light" light expand="md">
+        <NavbarBrand href="/"><img alt="logo" src={Logo} width={24} style={{"marginRight": 10, "marginBottom": 7}}/>Portfolio</NavbarBrand>
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="ml-auto" navbar>
+            <NavItem>
+              <NavLink href="/about">About</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/contact">Contact</NavLink>
+            </NavItem>
+            {state.isAuthenticated ? <NavItem><NavLink href="/profile">Profile</NavLink></NavItem> : null}
+            {state.isAuthenticated ? <NavItem><NavLink href="/auth/logout">Log Out</NavLink></NavItem> : <LoginButton />}
+          </Nav>
+        </Collapse>
+      </Navbar>
+    </div>
+  );
 }
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-      getAccount : (data) => dispatch(getAcc(data))
-  }
-};
-
-const mapStateToProps = (state) => {
-  return {
-    isAuthenticated: state.auth.isAuthenticated,
-    isAdmin: state.auth.isAdmin
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(NavigationBar);

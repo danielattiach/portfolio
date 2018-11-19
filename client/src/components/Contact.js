@@ -1,33 +1,22 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import MessageSuccess from './MessageSuccess';
 import MessageFail from './MessageFail';
 
-export default class Contact extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      name: '',
-      email: '',
-      subject: '',
-      message: '',
-      status: 0
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-    this.printState = this.printState.bind(this);
-  }
+export default function Contact() {
 
-  componentDidMount() {
-    document.title = 'Contact'
-  }
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState(0);
 
-  handleChange(e) {
-    e.preventDefault();
-    this.setState({[e.target.id]: e.target.value});
-  }
+  useEffect(() => {
+    document.title = 'Contact';
+    return;
+  }, []);
 
-  async onSubmit(e) {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const res = await fetch('/messages/send', {
       method: 'POST',
@@ -35,68 +24,62 @@ export default class Contact extends Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        name: this.state.name,
-        email: this.state.email,
-        subject: this.state.subject,
-        message: this.state.message
-      })
+      body: JSON.stringify({name, email, subject, message})
     });
-    this.setState({status: res.status});
+    setStatus(res.status);
   }
-
-  printState(e) {
+/*
+  const printState = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    console.log({name, email, subject, message, status});
   }
+*/
 
-  // method="POST" action="/messages/send"
-  render() {
-    if (this.state.status === 0) {
-      return (
-        <div className="mx-auto" style={{marginTop: "75px", width: "75%"}}>
-          <h2 className="text-center mb-3">Contact</h2>
-          <Form>
+  if (status === 0) {
+    return (
+      <div className="mx-auto" style={{marginTop: "75px", width: "75%"}}>
+        <h2 className="text-center mb-3">Contact</h2>
+        <Form>
+        <FormGroup row>
+            <Label for="name" sm={2} size="sm">Name:</Label>
+            <Col sm={10}>
+              <Input type="text" name="name" id="name" onChange={(e) => setName(e.target.value)}/>
+            </Col>
+          </FormGroup>
           <FormGroup row>
-              <Label for="name" sm={2} size="sm">Name:</Label>
-              <Col sm={10}>
-                <Input type="text" name="name" id="name" onChange={this.handleChange}/>
-              </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Label for="email" sm={2} size="sm">Email:</Label>
-              <Col sm={10}>
-                <Input type="email" name="email" id="email" onChange={this.handleChange}/>
-              </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Label for="subject" sm={2} size="sm">Subject:</Label>
-              <Col sm={10}>
-                <Input type="text" name="subject" id="subject" onChange={this.handleChange}/>
-              </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Label for="message" sm={2} size="sm">Message:</Label>
-              <Col sm={10}>
-                <Input type="textarea" name="message" id="message" onChange={this.handleChange}/>
-              </Col>
-            </FormGroup>
-            <div className="text-center"><Button onClick={this.onSubmit}>Submit</Button></div>
-          </Form>
-        </div>
-      )
-    } else if (this.state.status === 200) {
-      return (
-        <div className="text-center mx-auto" style={{marginTop: 75, width: "75%"}}>
-          <MessageSuccess name={this.state.name} email={this.state.email} subject={this.state.subject} message={this.state.message}/>
-        </div>
-      )
-    } else {
-      return (
-        <div className="text-center mx-auto" style={{marginTop: 75, width: "75%"}}>
-          <MessageFail />
-        </div>
-      )
-    }
+            <Label for="email" sm={2} size="sm">Email:</Label>
+            <Col sm={10}>
+              <Input type="email" name="email" id="email" onChange={(e) => setEmail(e.target.value)}/>
+            </Col>
+          </FormGroup>
+          <FormGroup row>
+            <Label for="subject" sm={2} size="sm">Subject:</Label>
+            <Col sm={10}>
+              <Input type="text" name="subject" id="subject" onChange={(e) => setSubject(e.target.value)}/>
+            </Col>
+          </FormGroup>
+          <FormGroup row>
+            <Label for="message" sm={2} size="sm">Message:</Label>
+            <Col sm={10}>
+              <Input type="textarea" name="message" id="message" onChange={(e) => setMessage(e.target.value)}/>
+            </Col>
+          </FormGroup>
+          <div className="text-center"><Button onClick={onSubmit}>Submit</Button></div>
+          {/*<div className="text-center"><Button onClick={printState}>Print State</Button></div>*/}
+        </Form>
+      </div>
+    )
+  } else if (status === 200) {
+    return (
+      <div className="text-center mx-auto" style={{marginTop: 75, width: "75%"}}>
+        <MessageSuccess name={name} email={email} subject={subject} message={message}/>
+      </div>
+    )
+  } else {
+    return (
+      <div className="text-center mx-auto" style={{marginTop: 75, width: "75%"}}>
+        <MessageFail />
+      </div>
+    )
   }
 }
