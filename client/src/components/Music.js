@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Song from './Song';
 import { Form, FormGroup, Label, Input, Button, Row, Col, FormFeedback } from 'reactstrap';
 import { ClimbingBoxLoader } from 'react-spinners';
+import NotFound from './NotFound';
 
 export default function Music() {
 
@@ -13,6 +14,7 @@ export default function Music() {
   const [results, setResults] = useState([[]]);
   const [page, setPage] = useState(0);
   const [valid, setValid] = useState(true);
+  const [found, setFound] = useState(true);
 
   const search = async e => {
     e.preventDefault();
@@ -29,9 +31,16 @@ export default function Music() {
         body: JSON.stringify({ track, num })
       });
       const data = await tracks.json();
-      setResults(data);
-      setTrack('');
-      setValid(true);
+      if (data.length === 0) {
+        setFound(false);
+        setTrack('');
+        setValid(true);
+      } else {
+        setResults(data);
+        setTrack('');
+        setValid(true);
+        setFound(true);
+      }
     }
   }
 
@@ -81,7 +90,10 @@ export default function Music() {
           <button className='next button' onClick={() => nextPage()}>Next</button>
         </div>
       )}
-        {results[0] === 'x' ? <div className="loader"><ClimbingBoxLoader className="mx-auto" color={'#4cb0de'} size={25} margin={25} /></div> : results[page].map((song, i) => i===0 || i===2 ? (
+      {!found ? (
+        <NotFound />
+      ) : (
+        results[0] === 'x' ? <div className="loader"><ClimbingBoxLoader className="mx-auto" color={'#4cb0de'} size={25} margin={25} /></div> : results[page].map((song, i) => i===0 || i===2 ? (
             results[page][i+1] ? (
               <div key={i} className="row">
                 <Song track={song} id={song.trackId} key={song.trackId} size={6}/>
@@ -94,8 +106,8 @@ export default function Music() {
             )
           ) : (
             ''
-          ))}
-      {}
+          ))
+      )}
       {results.length === 1 ? '' : (
         <div>
           <button className='back button' onClick={() => prevPage()}>Back</button>
