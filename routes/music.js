@@ -30,13 +30,24 @@ router.post('/search', async (req, res) => {
 */
 
 
+function paginate(list, howMany) {
+  var result = []
+  let input = list.slice(0)
+  while (input[0]) {
+    result.push(input.splice(0, howMany))
+  }
+  return result;
+}
+
 router.post('/search', async (req, res) => {
   const track = "&track=" + req.body.track;
+  const num = req.body.num || 40;
   const artist = "&artist=" + req.body.artist;
   const apikey = "&api_key=" + key;
-  const getter = await fetch(`https://itunes.apple.com/search?term=${req.body.track}&entity=song&media=music`);
+  const getter = await fetch(`https://itunes.apple.com/search?term=${req.body.track}&entity=song&media=music&limit=${num}`);
   const data = await getter.json();
-  res.send(data);
+  const paginated = paginate(data.results, 4);
+  res.send(paginated);
 });
 
 module.exports = router;
