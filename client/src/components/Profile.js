@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import '../css/profile.css';
+import { Context } from '../contexts/Context';
 
-export default function Profile({state}) {
+export default function Profile() {
 
   const [profile, setProfile] = useState({isAuthenticated: false, user: {name: '', avatar: ''}})
+  const {state} = useContext(Context);
 
   useEffect(() => {
     document.title = 'Profile';

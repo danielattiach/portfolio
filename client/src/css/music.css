@@ -78,17 +78,6 @@
   transition: 0.2s ease-in-out;
 }
 
-@media only screen and (max-width: 372px) {
-  .button {
-    width: 4rem;
-  }
-}
-
-@media only screen and (min-width: 372px) {
-  .button {
-    width: 4.3rem;
-  }
-}
 
 .button {
   height: 1.5rem;
@@ -151,4 +140,44 @@
   left: 0;
   top: 0;
   border-radius: 5px 0 0 5px;
+}
+
+
+
+@media only screen and (max-width: 372px) {
+  .button {
+    width: 4rem;
+  }
+}
+
+@media only screen and (min-width: 372px) {
+  .button {
+    width: 4.3rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .loader {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    height: 250px;
+    text-align: center;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .loader {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    height: 400px;
+    text-align: center;
+  }
 }

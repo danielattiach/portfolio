@@ -4,6 +4,7 @@ import '../css/music.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import Song from './Song';
 import { Form, FormGroup, Label, Input, Button, Row, Col, FormFeedback } from 'reactstrap';
+import { ClimbingBoxLoader } from 'react-spinners';
 
 export default function Music() {
 
@@ -80,7 +81,7 @@ export default function Music() {
           <button className='next button' onClick={() => nextPage()}>Next</button>
         </div>
       )}
-        {results[0] === 'x' ? 'Loading...' : results[page].map((song, i) => i===0 || i===2 ? (
+        {results[0] === 'x' ? <div className="loader"><ClimbingBoxLoader className="mx-auto" color={'#4cb0de'} size={25} margin={25} /></div> : results[page].map((song, i) => i===0 || i===2 ? (
             results[page][i+1] ? (
               <div key={i} className="row">
                 <Song track={song} id={song.trackId} key={song.trackId} size={6}/>

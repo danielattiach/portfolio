@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   Collapse,
   Navbar,
@@ -9,9 +9,12 @@ import {
   NavLink } from 'reactstrap';
 import Logo from '../img/logo-icon.png'
 import LoginButton from './LoginButton';
-export default function NavigationBar({state}) {
+import { Context } from '../contexts/Context';
+
+export default function NavigationBar() {
 
   const [isOpen, setIsOpen] = useState(false);
+  const {state} = useContext(Context)
 
   const toggle = () => {
     setIsOpen(!isOpen);
