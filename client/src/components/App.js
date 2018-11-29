@@ -14,7 +14,7 @@ import { ApolloProvider} from 'react-apollo';
 import  authReducer from '../reducers/authReducer';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:5000/graphql'
+  uri: '/graphql'
 });
 
 export default () => {
