@@ -5,8 +5,8 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem } from 'reactstrap';
-import GoogleIcon from '../img/google-icon.png';
-import GitHubIcon from '../img/github-icon.png';
+import GoogleIcon from '../../img/google-icon.png';
+import GitHubIcon from '../../img/github-icon.png';
 
 export default () => {
   return (

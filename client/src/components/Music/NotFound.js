@@ -1,7 +1,7 @@
 import React from 'react'
-import '../css/notfound.css';
+import '../../css/notfound.css';
 
-export default function NotFound() {
+export default () => {
   return (
     <div id="notfound">
 		<div className="notfound">

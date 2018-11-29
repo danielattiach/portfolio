@@ -7,11 +7,11 @@ import {
   Nav,
   NavItem,
   NavLink } from 'reactstrap';
-import Logo from '../img/logo-icon.png'
+import Logo from '../../img/logo-icon.png'
 import LoginButton from './LoginButton';
-import { Context } from '../contexts/Context';
+import { Context } from '../../contexts/Context';
 
-export default function NavigationBar() {
+export default () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const {state} = useContext(Context)

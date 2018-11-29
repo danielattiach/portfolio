@@ -1,23 +1,25 @@
 import React, {useState} from 'react'
-import '../css/top.css';
-import '../css/music.css';
+import '../../css/top.css';
+import '../../css/music.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import Song from './Song';
 import { Form, FormGroup, Label, Input, Button, Row, Col, FormFeedback } from 'reactstrap';
 import { ClimbingBoxLoader } from 'react-spinners';
 import NotFound from './NotFound';
+import JukeBox from './JukeBox';
 
-export default function Music() {
+export default () => {
 
   const [track, setTrack] = useState('');
   const [num, setNum] = useState('');
-  const [results, setResults] = useState([[]]);
-  const [page, setPage] = useState(0);
+  const [results, setResults] = useState([]);
+  const [page, setPage] = useState(1);
   const [valid, setValid] = useState(true);
   const [found, setFound] = useState(true);
 
   const search = async e => {
     e.preventDefault();
+    document.getElementById("num").value = "";
+    document.getElementById("search").value = "";
     if (track === '') {
       setValid(false);
     } else {
@@ -36,7 +38,9 @@ export default function Music() {
         setTrack('');
         setValid(true);
       } else {
-        setResults(data);
+        let music = [{}];
+        music = music.concat(data);
+        setResults(music);
         setTrack('');
         setValid(true);
         setFound(true);
@@ -45,13 +49,15 @@ export default function Music() {
   }
 
   const nextPage = () => {
-    if (results.length-1 > page && results !== [[]]) {
+    if (results.length-1 > page && results !== []) {
+      document.getElementById(results[page].trackId.toString()).pause();
       setPage(page+1);
     }
   }
 
   const prevPage = () => {
-    if (page > 0) {
+    if (page > 1) {
+      document.getElementById(results[page].trackId.toString()).pause();
       setPage(page-1);
     }
   }
@@ -83,37 +89,36 @@ export default function Music() {
         </Row>
         <Button className='search-btn mb-3' onSubmit={search}>Search</Button>
       </Form>
-      {results.length === 1 ? '' : (
+      {results.length === 0 ? '' : (
+        results.map((song, i) => {
+          if (i !== 0) {
+            return (
+              <div key={i}>
+                <audio id={results[i].trackId}>
+                  <source src={song.previewUrl} />
+                </audio>
+              </div>
+              )
+          } else return "";
+        })
+      )}
+      {results.length === 0 ? '' : (
         <div>
           <button className='back button' onClick={() => prevPage()}>Back</button>
-          <span className="page-num">{page+1}</span>
+          <span className="page-num">{page}</span>
           <button className='next button' onClick={() => nextPage()}>Next</button>
         </div>
       )}
-      {!found ? (
-        <NotFound />
-      ) : (
-        results[0] === 'x' ? <div className="loader"><ClimbingBoxLoader className="mx-auto" color={'#4cb0de'} size={25} margin={25} /></div> : results[page].map((song, i) => i===0 || i===2 ? (
-            results[page][i+1] ? (
-              <div key={i} className="row">
-                <Song track={song} id={song.trackId} key={song.trackId} size={6}/>
-                <Song track={results[page][i+1]} id={results[page][i+1].trackId} key={results[page][i+1].trackId} size={6}/>
-              </div>
-            ) : (
-              <div key={i} className="row">
-                <Song track={song} id={song.trackId} key={song.trackId} size={12}/>
-              </div>
-            )
-          ) : (
-            ''
-          ))
-      )}
-      {results.length === 1 ? '' : (
-        <div>
-          <button className='back button' onClick={() => prevPage()}>Back</button>
-          <span className="page-num">{page+1}</span>
-          <button  className='next button' onClick={() => nextPage()}>Next</button>
-        </div>
+      {results.length === 0 ? '' : (
+        !found ? (
+          <NotFound />
+        ) : (
+          results[0] === 'x' ? <div className="loader"><ClimbingBoxLoader className="mx-auto" color={'#4cb0de'} size={25} margin={25} /></div> : (
+            <div className="juke">
+              <JukeBox track={results[page]} tracks={results}/>
+            </div>
+          )
+        )
       )}
     </div>
   )

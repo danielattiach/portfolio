@@ -1,0 +1,501 @@
+$jukebox-color: #1d1d1d;
+$jukebox-background: #9fffb4;
+$jukebox-border: 5px solid $jukebox-color;
+$jukebox-width: 400px;
+$jukebox-max-width: 400px;
+$jukebox-height: 550px;
+$leg-height: 5px;
+$leg-width: 25px;
+$leg-radius: 5px;
+$head-height: $jukebox-width;
+$contractBy: 50px;
+$body-radius: 10px;
+
+* {
+  box-sizing: border-box;
+}
+
+.jukebox {
+  position: relative;
+  width: $jukebox-width;
+  min-width: $jukebox-max-width;
+  height: $jukebox-height;
+  margin: 20px auto;
+  padding-top: ($head-height / 2);
+
+
+  &__rating {
+    position: absolute;
+    left: 50%;
+    top: calc(50% - 77px);
+    width: 5px;
+    height: 150px;
+    background-color: #0089ff;
+    transform: translateX(-50%) rotate(35deg);
+    z-index: 20;
+  }
+
+  &__record {
+    position: absolute;
+    left: 50%;
+    top: 25%;
+    width: 55%;
+    height: 55%;
+    background-color: black;
+    border-radius: 50%;
+    transform: translateX(-50%) rotate(0);
+    z-index: 3;
+    box-shadow: inset 0px 0px 0 7px black, inset 0px 0px 0 10px #333333;
+    animation: spin 30s infinite;
+    animation-timing-function: linear;
+
+
+    &-image {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: calc(70%);
+      border-radius: 100%;
+      background-color: black;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &__head {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: $head-height;
+    width: 100%;
+    background-color: $jukebox-background;
+    border-radius: 50%;
+    border: $jukebox-border;
+    z-index: -1;
+    animation: lighting 5s infinite;
+
+    &::before {
+      position: absolute;
+      top: ($contractBy / 2);
+      left: ($contractBy / 2);
+      content: '';
+      height: calc(100% - #{$contractBy});
+      width: calc(100% - #{$contractBy});
+      border-radius: 50%;
+      background-color: hsl(34, 53%, 82%);
+      background-image: repeating-linear-gradient(45deg, transparent 5px, hsla(197, 62%, 11%, 0.5) 5px, hsla(197, 62%, 11%, 0.5) 10px,
+        hsla(5, 53%, 63%, 0) 10px, hsla(5, 53%, 63%, 0) 35px, hsla(5, 53%, 63%, 0.5) 35px, hsla(5, 53%, 63%, 0.5) 40px,
+        hsla(197, 62%, 11%, 0.5) 40px, hsla(197, 62%, 11%, 0.5) 50px, hsla(197, 62%, 11%, 0) 50px, hsla(197, 62%, 11%, 0) 60px,
+        hsla(5, 53%, 63%, 0.5) 60px, hsla(5, 53%, 63%, 0.5) 70px, hsla(35, 91%, 65%, 0.5) 70px, hsla(35, 91%, 65%, 0.5) 80px,
+        hsla(35, 91%, 65%, 0) 80px, hsla(35, 91%, 65%, 0) 90px, hsla(5, 53%, 63%, 0.5) 90px, hsla(5, 53%, 63%, 0.5) 110px,
+        hsla(5, 53%, 63%, 0) 110px, hsla(5, 53%, 63%, 0) 120px, hsla(197, 62%, 11%, 0.5) 120px, hsla(197, 62%, 11%, 0.5) 140px
+        ),
+      repeating-linear-gradient(135deg, transparent 5px, hsla(197, 62%, 11%, 0.5) 5px, hsla(197, 62%, 11%, 0.5) 10px,
+        hsla(5, 53%, 63%, 0) 10px, hsla(5, 53%, 63%, 0) 35px, hsla(5, 53%, 63%, 0.5) 35px, hsla(5, 53%, 63%, 0.5) 40px,
+        hsla(197, 62%, 11%, 0.5) 40px, hsla(197, 62%, 11%, 0.5) 50px, hsla(197, 62%, 11%, 0) 50px, hsla(197, 62%, 11%, 0) 60px,
+        hsla(5, 53%, 63%, 0.5) 60px, hsla(5, 53%, 63%, 0.5) 70px, hsla(35, 91%, 65%, 0.5) 70px, hsla(35, 91%, 65%, 0.5) 80px,
+        hsla(35, 91%, 65%, 0) 80px, hsla(35, 91%, 65%, 0) 90px, hsla(5, 53%, 63%, 0.5) 90px, hsla(5, 53%, 63%, 0.5) 110px,
+        hsla(5, 53%, 63%, 0) 110px, hsla(5, 53%, 63%, 0) 140px, hsla(197, 62%, 11%, 0.5) 140px, hsla(197, 62%, 11%, 0.5) 160px
+      );
+    }
+  }
+
+  &__body {
+    position: relative;
+    height: calc(100% - #{$leg-height});
+    width: 100%;
+    border: $jukebox-border;
+    border-top-width: 15px;
+    border-bottom-left-radius: $body-radius;
+    border-bottom-right-radius: $body-radius;
+    z-index: 30;
+    background-image: -webkit-linear-gradient(#D1A46B,#B57744);
+    background-image: linear-gradient(#D1A46B,#B57744);
+    -webkit-background-size: 100%;
+    background-size: 100%;
+
+    &::after,
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 25px;
+      height: calc(100% - 25px);
+      background-color: $jukebox-background;
+      animation: lighting 5s infinite;
+      animation-fill-mode: forwards;
+      z-index: 1;
+    }
+
+    &::before {
+      border-bottom-right-radius: $body-radius;
+    }
+
+    &::after {
+      left: auto;
+      right: 0;
+      border-bottom-left-radius: $body-radius;
+    }
+  }
+
+  &__internal {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    content: '';
+    height: calc(60% - #{$contractBy});
+    width: 60%;
+    background:
+      radial-gradient(black 15%, transparent 16%) 0 0,
+      radial-gradient(black 15%, transparent 16%) 8px 8px,
+      radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
+      radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
+      background-color:#282828;
+      background-size:16px 16px;
+    border-radius: 8%;
+    border: 3px solid black;
+    box-shadow: inset 0px 0px 8px 0px rgba(0, 0, 0, 0.3);
+    transform: translateX(-50%);
+    overflow: hidden;
+    text-align: center;
+    }
+
+
+  &__leg {
+    position: absolute;
+    bottom: 0;
+    width: $leg-width;
+    height: $leg-height;
+    border: 5px solid $jukebox-color;
+    z-index: -1;
+    border-bottom-left-radius: $leg-radius;
+    border-bottom-right-radius: $leg-radius;
+
+    &--left {
+      left: 20px;
+    }
+
+    &--right {
+      right: 20px;
+    }
+  }
+}
+
+.song-div {
+  border-radius: 8px;
+  height: 1.75rem;
+  width: 90%;
+  overflow: hidden;
+  position: relative;
+}
+.song-text {
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  margin-bottom: 20px;
+  text-align: center;
+  /* Starting position */
+  -moz-transform:translateX(100%);
+  -webkit-transform:translateX(100%);
+  transform:translateX(100%);
+  /* Apply animation to this element */
+  -moz-animation: slide-left 6s linear infinite;
+  -webkit-animation: slide-left 6s linear infinite;
+  animation: slide-left 6s linear infinite;
+}
+/* Move it (define the animation) */
+@-moz-keyframes slide-left {
+  0%   { -moz-transform: translateX(100%); }
+  100% { -moz-transform: translateX(-100%); }
+}
+@-webkit-keyframes slide-left {
+  0%   { -webkit-transform: translateX(100%); }
+  100% { -webkit-transform: translateX(-100%); }
+}
+@keyframes slide-left {
+  0%   {
+  -moz-transform: translateX(100%); /* Firefox bug fix */
+  -webkit-transform: translateX(100%); /* Firefox bug fix */
+  transform: translateX(100%);
+  }
+  100% {
+  -moz-transform: translateX(-100%); /* Firefox bug fix */
+  -webkit-transform: translateX(-100%); /* Firefox bug fix */
+  transform: translateX(-100%);
+  }
+}
+
+.metal {
+  background-color: hsl(0,0%,90%);
+  transition: color .2s;
+}
+
+.metal.linear {
+  background-image: -webkit-repeating-linear-gradient(left, hsla(0,0%,100%,0) 0%, hsla(0,0%,100%,0)   6%, hsla(0,0%,100%, .1) 7.5%),
+    -webkit-repeating-linear-gradient(left, hsla(0,0%,  0%,0) 0%, hsla(0,0%,  0%,0)   4%, hsla(0,0%,  0%,.03) 4.5%),
+    -webkit-repeating-linear-gradient(left, hsla(0,0%,100%,0) 0%, hsla(0,0%,100%,0) 1.2%, hsla(0,0%,100%,.15) 2.2%),
+
+    linear-gradient(180deg, hsl(0,0%,78%)  0%,
+    hsl(0,0%,90%) 47%,
+    hsl(0,0%,78%) 53%,
+    hsl(0,0%,70%)100%);
+}
+
+.song-pick-out {
+  display: flex;
+  overflow: scroll;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 5%;
+  background-color: white;
+  border-radius: 8px;
+  width: 80%;
+  height: 100px;
+}
+
+.song-pick-in {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.scroll-song {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+}
+
+@media only screen and (max-width: 400px) {
+  .jukebox {
+    width: 200px;
+    min-width: 200px;
+    height: 300px;
+    padding-top: (200px / 2);
+
+    &__head {
+      height: 200px;
+    }
+
+  }
+}
+
+@media only screen and (min-width: 401px) and (max-width: 500px) {
+  .jukebox {
+    width: 250px;
+    min-width: 250px;
+    height: 350px;
+    padding-top: (250px / 2);
+
+    &__head {
+      height: 250px;
+    }
+
+  }
+}
+
+@media only screen and (min-width: 501px) and (max-width: 580px) {
+  .jukebox {
+    width: 300px;
+    min-width: 300px;
+    height: 400px;
+    padding-top: (300px / 2);
+
+    &__head {
+      height: 300px;
+    }
+
+  }
+}
+
+
+@keyframes spin {
+  to {
+    transform: translateX(-50%) rotate(2154deg);
+  }
+}
+
+@keyframes lighting {
+  0% {
+    background-color: #9fffb4
+  }
+  20% {
+    background-color: #f09fff;
+  }
+  40% {
+    background-color: #9fedff;
+  }
+  60% {
+    background-color: #f9ff9f;
+  }
+  80% {
+    background-color: #ffa89f;
+  }
+  99% {
+    background-color: #bb9fff;
+  }
+}
+
+
+$bg-color: #29323F;
+
+::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
+/* optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: transparent;
+}
+
+.centerized {
+  position: absolute;
+  left: 0%;
+  top: 25%;
+  transform: translate3d(0%, -50%, 0);
+}
+
+.gallery {
+  padding: 40vh 100px;
+  width: 100%;
+  //height: 100px;
+  text-align: center;
+  white-space: nowrap;
+  overflow:hidden;
+  overflow-x: auto;
+  -webkit-overflow-scroll: touch;
+  &>div {
+    white-space: normal;
+    width: 200px;
+    width: 12vw;
+    //height: 9vw;
+    overflow: hidden;
+    -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(250, 250, 250, 0.1)));
+    display: inline-block;
+    margin-left: -4vw;
+
+    transform-origin: 40% 40%;
+    transform:
+      translate3d(0, 0, 0)
+      perspective( 15vw )
+      rotateY( -55deg );
+    position: relative;
+    opacity:1;
+    transition:
+      box-shadow 0.2s ease-out,
+      transform 0.2s ease-out;
+    &:hover, &:active {
+      transform:
+        translate3d(1vw, 0, 0)
+        perspective( 15vw )
+        scale(1.1)
+        rotateY( -35deg );
+      z-index: 99;
+      &:after {
+        opacity: 0.2;
+      }
+      span {
+        opacity: 0.9;
+        transform: translate(0);
+      }
+    }
+    $img-count: 100;
+    @for $i from 1 through $img-count{
+        &:nth-child(#{ $img-count - $i}) {
+            z-index: $i
+        }
+     }
+    img {
+      display: block;
+      z-index: 1;
+      position: relative;
+      height: 100%;
+    }
+
+     &:after {
+        position: absolute;
+        display: block;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        transition: opacity 0.2s ease-out;
+        background: linear-gradient(90deg, #000, transparent);
+        opacity: 0.8;
+        content: '';
+        z-index: 2;
+     }
+
+
+
+    span {
+
+      font-size: 1vw;
+      color: #f7f436;
+      text-align: right;
+      position: absolute;
+      transform: translate3d(0, 0px, 0);
+      text-transform: uppercase;
+      opacity: 0;
+      display:block;
+      width: 80%;
+      bottom:0.3vw;
+      right: 1.1vw;
+      z-index: 3;
+      font-weight: bold;
+      transition: all 0.05s ease-out;
+      text-shadow:1px 1px 1px #888,
+                  2px 2px 1px #888,
+                  3px 3px 1px #888,
+                  4px 4px 1px #888,
+                  5px 5px 1px #888,
+                  6px 6px 1px #888,
+                  7px 7px 1px #888,
+                  8px 8px 1px #888,
+                  9px 9px 1px #888,
+                  10px 10px 1px #888,
+                  11px 11px 1px #888,
+                  12px 12px 1px #888,
+                  13px 13px 1px #888,
+                  14px 14px 1px #888,
+                  15px 15px 1px #888,
+                  16px 16px 1px #888,
+                  17px 17px 1px #888,
+                  18px 18px 1px #888,
+                  19px 19px 1px #888,
+                  20px 20px 1px #888,
+                  21px 21px 1px #888,
+                  22px 22px 1px #888,
+                  23px 23px 1px #888,
+                  24px 24px 1px #888,
+                  25px 25px 1px #888,
+                  26px 26px 1px #888,
+                  27px 27px 1px #888,
+                  28px 28px 1px #888,
+                  29px 29px 1px #888,
+                  30px 30px 1px #888,
+                  31px 31px 1px #888,
+                  32px 32px 1px #888,
+                  33px 33px 1px #888,
+                  34px 34px 1px #888,
+                  35px 35px 1px #888,
+                  36px 36px 1px #888,
+                  37px 37px 1px #888,
+                  38px 38px 1px #888,
+                  39px 39px 1px #888,
+                  40px 40px 1px #888;
+    }
+
+  }
+  &.expanded>div {
+    width: 8.4vw;
+    height: 8.4vw;
+    margin-left: -0.7vw;
+    transform: none;
+    &:after {
+      opacity: 0;
+    }
+    img {
+      left: -25%;
+    }
+  }
+
+}

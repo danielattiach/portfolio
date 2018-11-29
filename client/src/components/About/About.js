@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { Progress } from 'reactstrap';
-import '../css/about.css';
+import '../../css/about.css';
 
-export default function About() {
+export default () => {
 
   useEffect(() => {
     document.title = 'About';

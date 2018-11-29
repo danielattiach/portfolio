@@ -46,8 +46,8 @@ router.post('/search', async (req, res) => {
   const apikey = "&api_key=" + key;
   const getter = await fetch(`https://itunes.apple.com/search?term=${req.body.track}&entity=song&media=music&limit=${num}`);
   const data = await getter.json();
-  const paginated = paginate(data.results, 4);
-  res.send(paginated);
+  //const paginated = paginate(data.results, 4);
+  res.send(data.results);
 });
 
 module.exports = router;

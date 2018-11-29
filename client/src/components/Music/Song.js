@@ -1,6 +1,8 @@
+/*
 import React, {useState} from 'react'
 import 'bootstrap/dist/css/bootstrap.css';
-import '../css/music.css';
+//import '../css/music.css';
+import '../css/jukebox.scss';
 
 export default function Song({track, id, size}) {
 
@@ -32,4 +34,6 @@ export default function Song({track, id, size}) {
       </div>
     </div>
   )
+
 }
+*/

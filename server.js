@@ -6,6 +6,8 @@ const passport = require('passport');
 const keys = require('./config/keys');
 const path = require('path');
 const cors = require('cors');
+const graphqlHTTP = require('express-graphql');
+const GraphQLSchema = require('./GraphQLSchema');
 
 require('./models/User');
 require('./services/passport');
@@ -61,6 +63,11 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
+
+app.use('/graphql', graphqlHTTP({
+  schema: GraphQLSchema,
+  graphiql: true
+}));
 
 const port = process.env.PORT || 5000;
 

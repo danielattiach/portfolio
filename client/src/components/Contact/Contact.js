@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
-import '../css/top.css';
+import '../../css/top.css';
 import MessageSuccess from './MessageSuccess';
 import MessageFail from './MessageFail';
 
-export default function Contact() {
+export default () => {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');

@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react'
-import '../css/profile.css';
-import { Context } from '../contexts/Context';
+import '../../css/profile.css';
+import { Context } from '../../contexts/Context';
 
-export default function Profile() {
+export default () => {
 
   const [profile, setProfile] = useState({isAuthenticated: false, user: {name: '', avatar: ''}})
   const {state} = useContext(Context);

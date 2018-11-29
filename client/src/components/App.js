@@ -2,15 +2,22 @@ import React, { useEffect, useReducer } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../css/top.css';
-import NavigationBar from './NavigationBar';
-import Profile from './Profile';
-import Contact from './Contact';
-import About from './About'
-import Music from './Music';
+import NavigationBar from './Nav/NavigationBar';
+import Profile from './Profile/Profile';
+import Contact from './Contact/Contact';
+import About from './About/About'
+import Music from './Music/Music';
+import SpaceX from './SpaceX/SpaceX';
 import {Context} from '../contexts/Context';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider} from 'react-apollo';
+import  authReducer from '../reducers/authReducer';
 
-import authReducer from '../reducers/authReducer';
-export default function App() {
+const client = new ApolloClient({
+  uri: 'http://localhost:5000/graphql'
+});
+
+export default () => {
   const [state, dispatch] = useReducer(authReducer, {
     isAuthenticated: false,
     user: {
@@ -35,17 +42,20 @@ export default function App() {
 
   return (
     <Context.Provider value={{state}}>
-      <NavigationBar/>
-      <div className = "container top">
-        <Router>
-          <div>
-            <Route path = '/music' component = {Music} />
-            <Route path = '/about' component = {About}/>
-            <Route path = '/profile' component={Profile} />
-            <Route path = '/contact' component = {Contact}/>
-          </div>
-        </Router>
-      </div>
+      <ApolloProvider client={client}>
+        <NavigationBar />
+        <div className = "container top">
+            <Router>
+              <div>
+                <Route path = '/music' component = {Music} />
+                <Route path = '/about' component = {About} />
+                <Route path = '/profile' component = {Profile} />
+                <Route path = '/contact' component = {Contact} />
+                <Route path = '/spacex' component = {SpaceX} />
+              </div>
+            </Router>
+        </div>
+      </ApolloProvider>
     </Context.Provider>
     )
   }
