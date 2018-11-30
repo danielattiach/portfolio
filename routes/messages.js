@@ -31,7 +31,7 @@ router.post('/send', (req, res) => {
     html: msg
   };
 
-  transporter.sendMail(mailOptions, function (err, info) {
+  transporter.sendMail(mailOptions, (err, info) => {
     if(err)
       //console.log(err)
       res.json({status: 500})
