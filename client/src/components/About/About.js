@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Progress } from 'reactstrap';
 import '../../css/about.css';
-// push test
+
 export default () => {
 
   useEffect(() => {
@@ -12,7 +12,7 @@ export default () => {
 
   return (
     <div className="mx-auto" style={{marginTop: "75px", width: "75%"}}>
-      <h3 className="text-center" >Daniel Attiach</h3>
+      <h3 className="text-center" >Daniel Attiach, skill-set:</h3>
       <div className="mx-auto" style={{width: "75%"}}>
       <div className="mt-2 mb-2">{js}: <Progress value={80} barClassName="js-bar" /></div>
       <div className="mt-2 mb-2">Node.js: <Progress value={70} barClassName="node-bar" /></div>
