@@ -11,7 +11,7 @@ const GraphQLSchema = require('./GraphQLSchema');
 const https = require("https");
 setInterval(() => {
     https.get("https://daniel-port.herokuapp.com");
-}, 300000); // every 5 minutes (300000)
+}, 600000); // every 5 minutes (300000)
 
 require('./models/User');
 require('./services/passport');
