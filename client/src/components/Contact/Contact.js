@@ -28,7 +28,7 @@ export default () => {
       body: JSON.stringify({name, email, subject, message})
     });
     setStatus(res.status);
-  }
+  };
 /*
   const printState = (e) => {
     e.preventDefault();

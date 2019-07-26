@@ -11,7 +11,7 @@ const GraphQLSchema = require('./GraphQLSchema');
 const https = require("https");
 setInterval(() => {
     https.get("https://daniel-port.herokuapp.com");
-}, 600000); // every 5 minutes (300000)
+}, 1.8e+6); // every 5 minutes (300000)
 
 require('./models/User');
 require('./services/passport');
@@ -25,8 +25,8 @@ app.use(cookieSession({
   keys: [keys.cookieKey]
 }));
 
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.initialize({}));
+app.use(passport.session({}));
 
 // Resolve CORS Issue
 app.use((req, res, next) => {
